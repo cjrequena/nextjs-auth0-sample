@@ -9,11 +9,11 @@
 |  ├── globals.css
 |  ├── layout.tsx
 |  └── page.tsx
-├── components
+├── components                      → reusable components
 ├── eslint.config.mjs
 ├── features
-├── hooks
-├── lib
+├── hooks                           → global reusable hooks
+├── lib                             → core utilities/config
 ├── next-env.d.ts
 ├── next.config.ts
 ├── node_modules
@@ -28,7 +28,6 @@
 |  ├── vercel.svg
 |  └── window.svg
 ├── services
-├── styles
 ├── tsconfig.json
-└── types
+└── types                           → global types
 ```
