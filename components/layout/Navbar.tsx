@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { getSession } from "@/lib/get-session";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await getSession();
+  const user = session?.user;
+
   return (
     <div className="navbar bg-base-100 shadow-sm px-4 lg:px-8">
       <div className="navbar-start">
@@ -14,6 +18,7 @@ export default function Navbar() {
             <li><a href="#services">Services</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#contact">Contact</a></li>
+            {user && <li><Link href="/dashboard">Dashboard</Link></li>}
           </ul>
         </div>
         <Link href="/" className="btn btn-ghost text-xl font-bold">
@@ -25,11 +30,21 @@ export default function Navbar() {
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#contact">Contact</a></li>
+          {user && <li><Link href="/dashboard">Dashboard</Link></li>}
         </ul>
       </div>
       <div className="navbar-end gap-2">
-        <Link href="/signin" className="btn btn-ghost btn-sm">Sign In</Link>
-        <Link href="/signup" className="btn btn-primary btn-sm">Sign Up</Link>
+        {user ? (
+          <>
+            <span className="text-sm hidden sm:inline">{user.name || user.email}</span>
+            <a href="/api/auth/signout" className="btn btn-ghost btn-sm">Sign Out</a>
+          </>
+        ) : (
+          <>
+            <Link href="/signin" className="btn btn-ghost btn-sm">Sign In</Link>
+            <Link href="/signup" className="btn btn-primary btn-sm">Sign Up</Link>
+          </>
+        )}
       </div>
     </div>
   );
