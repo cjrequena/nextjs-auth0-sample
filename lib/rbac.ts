@@ -1,6 +1,6 @@
 import type { User } from "@auth0/nextjs-auth0/types";
 
-const NAMESPACE = "https://clinichub.com";
+const NAMESPACE = "https://nextjs-auth0-sample.com";
 
 export function getRoles(user: User): string[] {
   return (user[`${NAMESPACE}/roles`] as string[]) ?? [];
